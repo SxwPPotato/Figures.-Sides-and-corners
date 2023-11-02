@@ -1,7 +1,21 @@
 ﻿#include <iostream>
+#include <string>
 
 
-class Triangle  {
+class Figures {
+protected:
+    std::string Name_of_figure;
+public:
+    void Show_name() {
+        std::cout <<"\n" << "\n" << Name_of_figure << ": ";
+    }
+     virtual void Show_figure() {
+       
+    }
+};
+
+
+class Triangle : public Figures {
 protected:
     int a;
     int b;
@@ -18,6 +32,7 @@ public:
         A = 0;
         B = 0;
         C = 0;
+        Name_of_figure = "Треугольник";
     };
     Triangle(int a, int b, int c, int A, int B, int C) {
         this->a = a;
@@ -26,11 +41,13 @@ public:
         this->A = A;
         this->B = B;
         this->C = C;
+        Name_of_figure = "Треугольник";
     }
-    void Show_triangle() {
-        std::cout << "Стороны: " << a <<" " << b <<" " << c << "\n";
+    void Show_figure() override{
+        std::cout << "\n" << "Стороны: " << a <<" " << b <<" " << c << "\n";
         std::cout << "Углы: " << A << " " << B  << " " << C;
     }
+
 };
 
 class Right_triangle : public Triangle {
@@ -42,6 +59,7 @@ public:
         this->A = A;
         this->B = B;
         C = 90;
+        Name_of_figure = "Правильный треугольник";
     }
 };
 
@@ -54,6 +72,7 @@ public:
         this->B = B;
         c = a;
         C = A;
+        Name_of_figure = "Равнобедренный треугольник";
     }
 };
 
@@ -63,12 +82,13 @@ public:
         this->a = a;
         b = c = a;
         A = B = C = 60;
+        Name_of_figure = "Равносторонний треугольник";
 
     }
 };
 
 
-class Quadrangle {
+class Quadrangle : public Figures {
 protected:
     int a;
     int b;
@@ -89,6 +109,7 @@ public:
         B = 0;
         C = 0;
         D = 0;
+        Name_of_figure = "Четырёхугольник";
     };
     Quadrangle(int a, int b, int c,int d, int A, int B, int C, int D) {
         this->a = a;
@@ -99,9 +120,10 @@ public:
         this->B = B;
         this->C = C;
         this->D = D;
+        Name_of_figure = "Четырёхугольник";
     }
-    void Show_quadrangle() {  
-        std::cout << "Стороны: " << a << " " << b << " " << c << " " << d << "\n";
+    void Show_figure() override {
+        std::cout << "\n" << "Стороны: " << a << " " << b << " " << c << " " << d << "\n";
         std::cout << "Углы: " << A << " " << B << " " << C << " " << D;
     }
 };
@@ -118,6 +140,7 @@ public:
         d = b;
         C = A;
         D = B;
+        Name_of_figure = "Параллелограмм";
     }
 };
 
@@ -129,6 +152,7 @@ public:
         c = a;
         d = b;
         B = C = D = A = 90;
+        Name_of_figure = "Прямоугольник";
     }
 };
 
@@ -145,6 +169,7 @@ public:
         b = c = d = a;
         C = A;
         D = B;
+        Name_of_figure = "Ромб";
     }
 };
 
@@ -155,8 +180,15 @@ public:
         this->a = a;
         b = c = d = a;
         B = C = D = A = 90;
+        Name_of_figure = "Квадрат";
     }
 };
+
+
+void print_info(Figures* figure) {
+    figure->Show_figure();
+}
+
 
 int main()
 {
@@ -172,26 +204,25 @@ int main()
     Rhomb rhomb(30, 20, 30);
     Quadrate quadrate(20);
     
-    
-    std::cout << "\nТреугольник: " << "\n";
-    triangle.Show_triangle();
-    std::cout << "\n\nПрямоугольный треугольник: " << "\n";
-    right_triangle.Show_triangle();
-    std::cout << "\n\nРавнобедренный треугольник: " << "\n";
-    isosceles_triangle.Show_triangle();
-    std::cout << "\n\nРавносторонний треугольник: " << "\n";
-    equilateral_triangle.Show_triangle();
+    triangle.Show_name();
+    print_info(&triangle);
+    right_triangle.Show_name();
+    print_info(&right_triangle);
+    isosceles_triangle.Show_name();;
+    print_info(&isosceles_triangle);
+    equilateral_triangle.Show_name();
+    print_info(&equilateral_triangle);
 
-    std::cout << "\n\nЧетырёхугольник: " << "\n";
-    quadrangle.Show_quadrangle();
-    std::cout << "\n\nПрямоугольник: " << "\n";
-    rectangle.Show_quadrangle();
-    std::cout << "\n\nКвадрат: " << "\n";
-    quadrate.Show_quadrangle();
-    std::cout << "\n\nПараллелограмм: " << "\n";
-    parallelogram.Show_quadrangle();
-    std::cout << "\n\nРомб: " << "\n";
-    rhomb.Show_quadrangle();
+    quadrangle.Show_name();
+    print_info(&quadrangle);
+    rectangle.Show_name();
+    print_info(&rectangle);
+    quadrate.Show_name();
+    print_info(&quadrate);
+    parallelogram.Show_name();
+    print_info(&parallelogram);
+    rhomb.Show_name();
+    print_info(&rhomb);
     std::cout << "\n";
     return 0;
 
